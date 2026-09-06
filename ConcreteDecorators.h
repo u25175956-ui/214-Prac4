@@ -12,7 +12,7 @@ public:
     TimedQuest(QuestComponent* wrapped, int limitSeconds);
     ~TimedQuest();
 
-    void start();
+    virtual void start();
     void tick(int seconds);
 };
 
@@ -24,7 +24,7 @@ public:
     BonusRewardQuest(QuestComponent* wrapped, double multiplier);
     ~BonusRewardQuest();
 
-    int getReward();
+    virtual int getReward() const;
 };
 
 class StealthQuest : public QuestDecorator {
@@ -33,9 +33,9 @@ private:
 
 public:
     StealthQuest(QuestComponent* wrapped);
-    ~StealthQuest();
+    virtual ~StealthQuest();
 
-    void fail();
+    virtual void fail();
     void setDetected(bool detected);
 };
 
@@ -45,9 +45,9 @@ private:
 
 public:
     HardcoreQuest(QuestComponent* wrapped, int livesLeft);
-    ~HardcoreQuest();
+    virtual ~HardcoreQuest();
 
-    void fail();
+    virtual void fail();
 };
 
 #endif

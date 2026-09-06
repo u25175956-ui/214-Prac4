@@ -29,7 +29,7 @@ BonusRewardQuest::BonusRewardQuest(QuestComponent* wrapped, double multiplier)
 BonusRewardQuest::~BonusRewardQuest() {
 }
 
-int BonusRewardQuest::getReward() {
+int BonusRewardQuest::getReward() const {
     return static_cast<int>(wrapped->getReward() * multiplier);
 }
 
@@ -65,3 +65,4 @@ void HardcoreQuest::fail() {
         wrapped->fail();
     }
 }
+

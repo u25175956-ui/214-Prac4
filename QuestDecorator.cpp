@@ -1,7 +1,8 @@
 #include "QuestDecorator.h"
 #include "QuestIterator.h"
 
-QuestDecorator::QuestDecorator(QuestComponent* wrapped) : wrapped(wrapped) {
+QuestDecorator::QuestDecorator(QuestComponent* wrapped)
+    : QuestComponent(wrapped->getName()), wrapped(wrapped) {
 }
 
 QuestDecorator::~QuestDecorator() {
@@ -20,12 +21,20 @@ void QuestDecorator::fail() {
     wrapped->fail();
 }
 
-void QuestDecorator::reportStatus() {
-    wrapped->reportStatus();
+void QuestDecorator::reportStatus(int depth) const {
+    wrapped->reportStatus(depth);
 }
 
-int QuestDecorator::getReward() {
+int QuestDecorator::getReward() const {
     return wrapped->getReward();
+}
+
+int QuestDecorator::countQuests() const {
+    return wrapped->countQuests();
+}
+
+bool QuestDecorator::isSatisfied() const {
+    return wrapped->isSatisfied();
 }
 
 QuestIterator* QuestDecorator::createIterator() {

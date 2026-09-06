@@ -14,8 +14,10 @@ public:
     virtual void start();
     virtual void complete();
     virtual void fail();
-    virtual void reportStatus();
-    virtual int getReward();
+    virtual void reportStatus(int depth) const;
+    virtual int getReward() const;
+    virtual int countQuests() const;
+    virtual bool isSatisfied() const;
     virtual QuestIterator* createIterator();
 };
 
