@@ -1,4 +1,5 @@
 #include "Objective.h"
+#include "SingleIterator.h"
 #include <iostream>
 
 Objective::Objective(const std::string& name, int xp, int target)
@@ -36,3 +37,7 @@ void Objective::reportStatus(int depth) const {
 int Objective::getReward() const { return satisfied ? xp : 0; }
 int Objective::countQuests() const { return 0; }
 bool Objective::isSatisfied() const { return satisfied; }
+
+QuestIterator* Objective::createIterator() {
+    return new SingleIterator(this);
+}

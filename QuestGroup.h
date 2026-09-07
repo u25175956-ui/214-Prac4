@@ -54,6 +54,7 @@ public:
     virtual int getReward() const;
     virtual int countQuests() const;
     virtual bool isSatisfied() const;
+    virtual QuestIterator* createIterator();
 
 protected:
     /** @return Short name of this group kind, e.g. "Questline". */

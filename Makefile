@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++11 -Wall -Wextra -g
+CXXFLAGS := -std=c++11 -Wall -Wextra -g -O0
 TARGET := taskforge
 IMAGE := taskforge
 

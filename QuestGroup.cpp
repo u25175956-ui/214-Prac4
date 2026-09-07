@@ -1,4 +1,5 @@
 #include "QuestGroup.h"
+#include "StoryOrderIterator.h"
 #include <iostream>
 
 QuestGroup::QuestGroup(const std::string& name) : QuestComponent(name) {}
@@ -75,4 +76,8 @@ void QuestGroup::reportStatus(int depth) const {
     reportOwnDetail();
     std::cout << "\n";
     for (size_t i = 0; i < children.size(); ++i) children[i]->reportStatus(depth + 1);
+}
+
+QuestIterator* QuestGroup::createIterator() {
+    return new StoryOrderIterator(this);
 }

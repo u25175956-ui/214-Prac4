@@ -3,6 +3,9 @@
 
 #include <string>
 
+class QuestIterator;
+class QuestState;
+
 // NOT YET IMPLEMENTED - added in later milestones, do not add now:
 //   - QuestState* state          (State milestone: replaces nothing here,
 //                                 adds a protected member + setState())
@@ -64,12 +67,18 @@ public:
      */
     virtual bool isSatisfied() const = 0;
 
+    virtual QuestIterator* createIterator() = 0;
+
+     void setState(QuestState* newState);
+    virtual std::string getStateName() const;
+
 protected:
     /** @brief Writes 2*depth spaces. Shared by every reportStatus override. */
     void indent(int depth) const;
 
     std::string name;
-
+ /** @brief Current State owned by this component. */
+    QuestState* state;
 private:
     QuestComponent(const QuestComponent&);
     QuestComponent& operator=(const QuestComponent&);
