@@ -3,6 +3,7 @@
 #define QUESTSTATE_H
 
 #include <string>
+#include "QuestComponent.h"
 class QuestComponent;
 //although the QuestComponent is the composite pattern, it serves as the context (the guy that holds the current state and delegates its work to that state) for state
 

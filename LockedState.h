@@ -1,6 +1,8 @@
 #ifndef LOCKEDSTATE_H
 #define LOCKEDSTATE_H
 #include "QuestState.h"
+#include "AvailableState.h"
+#include "ActiveState.h"
 
 class LockedState: public QuestState{
     public:

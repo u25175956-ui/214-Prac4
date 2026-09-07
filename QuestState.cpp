@@ -4,4 +4,4 @@ QuestState::QuestState(QuestComponent* q){
     this->quest = q;
 }
 
-QuestState::~QuestState(){}
+QuestState::~QuestState{}

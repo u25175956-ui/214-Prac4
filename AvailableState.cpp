@@ -1,9 +1,7 @@
 #include "AvailableState.h"
-#include "QuestComponent.h"
-#include "ActiveState.h"
 
 std::string AvailableState::getName(){
-    return "State: Available";
+    return "State: Rerouting - Next Available State";
 }
 
 void AvailableState::onStart(){

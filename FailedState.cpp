@@ -1,9 +1,8 @@
 #include "FailedState.h"
-#include "QuestComponent.h"
-#include "AvailableState.h"
+
 
 std::string FailedState::getName(){
-    return "State: Failed";
+    return "State: Failed.\nRerouting To An Available State";
 }
 
 void FailedState::onUnlock(){

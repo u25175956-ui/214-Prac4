@@ -2,7 +2,7 @@
 #define FAILEDSTATE_H
 
 #include "QuestState.h"//because the pure virtual functions that i need to implement are defined here
-
+#include "AvailableState.h"
 
 class FailedState: public QuestState{
     public:
