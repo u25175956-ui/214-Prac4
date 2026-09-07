@@ -42,6 +42,10 @@ public:
     /** @brief Starts the campaign; the call recurses down on its own. */
     void beginAdventure();
 
+     // Iterator-based journal views
+    void listStoryOrder() const;
+    void listAvailable() const;
+
 private:
     QuestJournal(const QuestJournal&);
     QuestJournal& operator=(const QuestJournal&);

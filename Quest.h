@@ -23,6 +23,10 @@ public:
     /** @return 1 - a quest counts itself; groups above sum these. */
     virtual int countQuests() const;
 
+    virtual void start();
+    virtual void fail();
+    void unlock();
+
 protected:
     virtual std::string kindLabel() const;
     virtual void reportOwnDetail() const;

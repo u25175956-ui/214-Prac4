@@ -19,6 +19,8 @@ public:
     virtual int countQuests() const;
     virtual bool isSatisfied() const;
     virtual QuestIterator* createIterator();
+    virtual std::string getStateName() const;
+    
 };
 
 #endif

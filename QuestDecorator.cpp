@@ -40,3 +40,7 @@ bool QuestDecorator::isSatisfied() const {
 QuestIterator* QuestDecorator::createIterator() {
     return wrapped->createIterator();
 }
+
+std::string QuestDecorator::getStateName() const {
+    return wrapped->getStateName();
+}
