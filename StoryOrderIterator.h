@@ -10,6 +10,7 @@ private:
     QuestGroup* group;
     int index;
     QuestIterator* childIt;
+    bool selfReturned;
 
     void enterChild();
 

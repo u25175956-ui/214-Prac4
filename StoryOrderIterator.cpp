@@ -2,7 +2,7 @@
 #include "QuestGroup.h"
 
 StoryOrderIterator::StoryOrderIterator(QuestGroup* group)
-    : group(group), index(0), childIt(0) {
+    : group(group), index(0), childIt(0), selfReturned(false) {
 
     first();
 }
@@ -35,11 +35,18 @@ void StoryOrderIterator::enterChild() {
 void StoryOrderIterator::first() {
 
     index = 0;
-
-    enterChild();
+    selfReturned = false;
+    delete childIt;
+    childIt = 0;
 }
 
 void StoryOrderIterator::next() {
+
+    if (!selfReturned) {
+        selfReturned = true;
+        enterChild();
+        return;
+    }
 
     if (childIt == 0) {
         return;
@@ -48,19 +55,23 @@ void StoryOrderIterator::next() {
     childIt->next();
 
     if (childIt->isDone()) {
-
         index++;
-
         enterChild();
     }
 }
 
 bool StoryOrderIterator::isDone() const {
-
+    if (!selfReturned) {
+        return false;
+    }
     return childIt == 0;
 }
 
 QuestComponent* StoryOrderIterator::current() const {
+
+    if (!selfReturned) {
+        return group;
+    }
 
     if (childIt == 0) {
         return 0;

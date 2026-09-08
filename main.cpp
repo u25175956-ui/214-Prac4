@@ -16,6 +16,25 @@
  * ---------------------------------------------------------
  */
 
+ // put near the top of main.cpp
+namespace Color {
+    const std::string RESET   = "\033[0m";
+    const std::string LOCKED  = "\033[90m";  // grey
+    const std::string AVAIL   = "\033[33m";  // yellow/gold
+    const std::string ACTIVE  = "\033[36m";  // cyan
+    const std::string DONE    = "\033[32m";  // green
+    const std::string FAILED  = "\033[31m";  // red
+}
+
+static std::string colorFor(const std::string& stateName) {
+    if (stateName.find("Locked") != std::string::npos)   return Color::LOCKED;
+    if (stateName.find("Available") != std::string::npos) return Color::AVAIL;
+    if (stateName.find("Active") != std::string::npos)    return Color::ACTIVE;
+    if (stateName.find("Complete") != std::string::npos)  return Color::DONE;
+    if (stateName.find("Failed") != std::string::npos)    return Color::FAILED;
+    return Color::RESET;
+}
+
 static void showMenu() {
 
     std::cout << "\n";
@@ -80,7 +99,6 @@ static void showAvailableQuests(QuestComponent* root) {
     delete iterator;
 }
 
-
 static void showStoryOrder(QuestComponent* root) {
 
     if (root == 0) {
@@ -101,17 +119,14 @@ static void showStoryOrder(QuestComponent* root) {
 
         if (node != 0) {
 
-            std::cout << "  - "
-                      << node->getName()
-                      << " ["
-                      << node->getStateName()
-                      << "]\n";
+            std::cout << "  - " << node->getName()
+                      << " [" << colorFor(node->getStateName())
+                      << node->getStateName() << Color::RESET << "]\n";
         }
     }
 
     delete iterator;
 }
-
 
 /*
  * ---------------------------------------------------------
@@ -503,6 +518,36 @@ int main() {
 
             break;
 
+            case 14: {
+    std::cout << "Starting a story-order iterator (Iterator A)...\n";
+    QuestIterator* iterA = campaign->createIterator();
+    iterA->first();
+
+    std::cout << "First 2 nodes from Iterator A:\n";
+    for (int i = 0; i < 2 && !iterA->isDone(); i++) {
+        std::cout << "  - " << iterA->current()->getName() << "\n";
+        iterA->next();
+    }
+
+    std::cout << "\n--- Structural change happens now (moving Defeat Bandits) ---\n";
+    if (elderPath->remove(defeatBanditsHard)) {
+        smithTrials->add(defeatBanditsHard);
+    }
+
+    std::cout << "\nIterator A continues on its ORIGINAL snapshot:\n";
+    for (; !iterA->isDone(); iterA->next()) {
+        std::cout << "  - " << iterA->current()->getName() << "\n";
+    }
+    delete iterA;
+
+    std::cout << "\nA brand-new Iterator B sees the UPDATED structure:\n";
+    QuestIterator* iterB = campaign->createIterator();
+    for (iterB->first(); !iterB->isDone(); iterB->next()) {
+        std::cout << "  - " << iterB->current()->getName() << "\n";
+    }
+    delete iterB;
+    break;
+}
 
         /*
          * -------------------------------------------------
